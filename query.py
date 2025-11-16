@@ -40,6 +40,8 @@ with sqlite3.connect('concrete.db') as conn:
 
     # 3. Count tests by project
 
-    
+    cursor.execute('SELECT project_name, COUNT(*) AS total_tests, SUM(passed) AS total_passed FROM concrete_tests GROUP BY project_name')
+    all = cursor.fetchall()
 
-
+    for row in all:
+     print(row['project_name'],":", row['total_passed'],"/", row['total_tests'], "passed")
